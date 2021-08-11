@@ -58,7 +58,7 @@ print(player.get_p(item_num=1, calc_pull=1000, pull_state=50))
 
 
 
-# 欧气检测（目前使用受限，适用于常驻祈愿和角色活动祈愿五星数的欧气检测，可图一乐）
+# 欧气检测（适用于常驻祈愿和角色活动祈愿五星数的欧气检测，可图一乐）(UP数量欧气检测也能写，但是有点麻烦，诶嘿不写了)
 player = GGanalysislib.PityGacha()
 print("总共抽了100抽，出了2个五星，还垫了60抽")
 print("你的运气击败了"+str(round(100*player.luck_evaluate(item_num=2, use_pull=100, leave_pull=60), 2))+"%的玩家")
