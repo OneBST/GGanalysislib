@@ -1,0 +1,6 @@
+__pycache__/ 
+*.pyc
+test.py
+*.o
+check.csv
+check.xlsx
