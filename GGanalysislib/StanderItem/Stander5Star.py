@@ -8,7 +8,7 @@ class Stander5StarCharacter(Stander5Star):
         self.pity_p = self.common_5star_pity()
     def set_const(self):
         # 保底参数
-        # self.pity_pos = 90          # 保底位置
+        self.pity_pos = 90          # 保底位置
         self.hit_pos = 180          # 类别保底位置
 
         # 普池参数

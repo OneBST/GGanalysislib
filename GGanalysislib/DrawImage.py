@@ -22,16 +22,24 @@ class DrawTransCDF():
         calc_pull = data_size[1]
 
         self.fig_size = [6, max(self.fig_size_y, math.log(calc_pull))]
-        fig = plt.figure(dpi=self.img_dpi, figsize=self.fig_size)
+        x_tick = 1/self.tick_number
+        y_tick = self.tick_step*int(round(calc_pull/(self.tick_step*self.fig_size[1]/self.fig_size[0]*self.tick_number)))
+        
+        fig = plt.figure(dpi=self.img_dpi, figsize=self.fig_size) 
         ax = fig.gca()
 
         # 设置网格刻度和画图范围
-        x_tick = 1/self.tick_number
+        
+        
         ax.set_xticks(np.arange(0, 1.01, x_tick))
-        y_tick = self.tick_step*int(round(calc_pull/(self.tick_step*self.fig_size[1]/self.fig_size[0]*self.tick_number)))
         ax.set_yticks(np.arange(0, int(calc_pull/y_tick)*y_tick+1, y_tick))
+        # The Ultimate Guide To Set Aspect Ratio in Matplotlib https://www.pythonpool.com/matplotlib-aspect-ratio/
+        # ax.set_aspect((1.1/(calc_pull+y_tick))*((calc_pull+y_tick)/y_tick)/(1.1/x_tick)) # ((calc_pull+y_tick)/y_tick)/((1.1)/x_tick)
+        
         plt.xlim(-0.05, 1.05)
         plt.ylim(-y_tick/2, calc_pull+y_tick/2)
+        
+
         # https://stackoverflow.com/questions/9127434/how-to-create-major-and-minor-gridlines-with-different-linestyles-in-python
         plt.grid(b=True, which='major', color='lightgray', linestyle='-', linewidth=1)
         plt.grid(b=True, which='minor', color='lightgray', linestyle='-', linewidth=0.5)
@@ -91,7 +99,7 @@ class DrawTransCDF():
                 horizontalalignment='left',
                 verticalalignment='top')
         if self.save_img:
-            plt.savefig('./fig/'+self.img_name+'.png', bbox_inches='tight' , pad_inches=0.1)  # 
+            plt.savefig('./fig/'+self.img_name+'.png', bbox_inches='tight' , pad_inches=0.15)  # 
         if self.show_img:
             plt.show()
 

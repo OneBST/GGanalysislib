@@ -1,4 +1,3 @@
-from typing import ItemsView
 from GGanalysislib.UpItem.Up5starCharacter import Up5starCharacter
 import GGanalysislib
 import matplotlib.cm as cm
@@ -9,8 +8,9 @@ import numpy as np
 img_dpi = 300
 save_img = 1
 show_img = 0
+text_model = "采用bilibili.com/read/cv10468091模型\n"
 
-''''''
+
 # 角色活动祈愿五星角色
 calc_obj = GGanalysislib.Up5starCharacter()
 a = GGanalysislib.DrawTransCDF()
@@ -20,7 +20,7 @@ a.line_colors = cm.Blues(np.linspace(0.5, 0.9, a.item_num))
 a.img_name = "UpCharacter5"
 a.img_title = "原神UP五星角色抽取概率"
 
-text_model = "采用bilibili.com/read/cv10468091模型\n"
+
 text_note = "本算例中UP物品均不在常驻祈愿中\n"
 text_up_expectation = "获取一个特定UP物品的期望为"+str(round(calc_obj.reference_upitem_expectation,2))+"抽\n"
 text_up_badcase = "获取一个特定UP物品最多需要"+str(2*calc_obj.pity_pos)+"抽\n"
@@ -123,7 +123,7 @@ a.plot_img(calc_obj.get_distribution(a.item_num, 600, 0).cumsum(axis=1))
 
 
 
-'''
+
 # 常驻祈愿抽五星角色
 calc_obj = GGanalysislib.Stander5StarCharacter()
 a = GGanalysislib.DrawTransCDF()
@@ -132,7 +132,12 @@ a.item_type = "Character"
 a.line_colors = cm.PuRd(np.linspace(0.5, 1, a.item_num))
 a.img_name = "StanderCharacter5"
 a.img_title = "原神常驻祈愿抽取特定五星角色概率"
-a.img_description = "获取一个物品的期望抽数为"+str(round(calc_obj.item_expectation*calc_obj.stander_num, 2))+"抽\n无法保证在有限抽数内获得指定五星角色\n本图绘制时，常驻祈愿包含"+str(calc_obj.stander_num)+"种五星角色\n"
+
+text_note = "本算例中常驻祈愿中有"+str(calc_obj.stander_num)+"种五星角色\n"
+temp_obj = GGanalysislib.PityGacha()
+text_up_expectation = "获取一个五星物品的期望为"+str(round(calc_obj.item_expectation,2))+"抽\n"
+text_up_badcase = "无法保证在有限抽数内必能获得特定物品\n"
+a.img_description = text_model+text_note+text_up_expectation+text_up_badcase
 a.x_bias_num = -7.6          # x方向偏移量
 
 a.img_dpi = img_dpi
@@ -149,7 +154,14 @@ a.item_type = "Character"
 a.line_colors = cm.RdPu(np.linspace(0.5, 1, a.item_num))
 a.img_name = "StanderCharacter4"
 a.img_title = "原神常驻祈愿抽取特定四星角色概率"
-a.img_description = "获取一个物品的期望抽数为"+str(round(calc_obj.item_expectation*calc_obj.stander_num, 2))+"抽\n无法保证在有限抽数内获得指定四星角色\n本图绘制时，常驻祈愿包含"+str(calc_obj.stander_num)+"种四星角色\n"
+
+text_note = "本算例中常驻祈愿中有"+str(calc_obj.stander_num)+"种四星角色\n"
+temp_obj = GGanalysislib.PityGacha()
+coupling_4star_p = GGanalysislib.calc_coupling_p(temp_obj.weapon_5star_pity(), temp_obj.weapon_4star_pity())
+text_up_expectation = "获取一个四星物品的期望为"+str(round(1/coupling_4star_p,2))+"抽\n"
+text_up_badcase = "无法保证在有限抽数内必能获得特定物品\n"
+a.img_description = text_model+text_note+text_up_expectation+text_up_badcase
+
 a.x_bias_num = -7.6          # x方向偏移量
 
 a.img_dpi = img_dpi
@@ -166,13 +178,19 @@ a.item_type = "Weapon"
 a.line_colors = cm.OrRd(np.linspace(0.4, 1, a.item_num))
 a.img_name = "StanderWeapon5"
 a.img_title = "原神常驻祈愿抽取特定五星武器概率"
-a.img_description = "获取一个物品的期望抽数为"+str(round(calc_obj.item_expectation*calc_obj.stander_num, 2))+"抽\n无法保证在有限抽数内获得指定五星武器\n本图绘制时，常驻祈愿包含"+str(calc_obj.stander_num)+"种五星武器\n"
+
+text_note = "本算例中常驻祈愿中有"+str(calc_obj.stander_num)+"种五星武器\n"
+temp_obj = GGanalysislib.PityGacha()
+text_up_expectation = "获取一个五星物品的期望为"+str(round(calc_obj.item_expectation,2))+"抽\n"
+text_up_badcase = "无法保证在有限抽数内必能获得特定物品\n"
+a.img_description = text_model+text_note+text_up_expectation+text_up_badcase
 a.x_bias_num = -7.6          # x方向偏移量
 
 a.img_dpi = img_dpi
 a.save_img = save_img               # 是否保存图片
 a.show_img = show_img               # 是否显示图片
 a.plot_img(calc_obj.get_distribution(a.item_num, 16000, 0).cumsum(axis=1))
+
 
 # 常驻祈愿抽四星武器
 calc_obj = GGanalysislib.Stander4StarWeapon()
@@ -182,7 +200,13 @@ a.item_type = "Weapon"
 a.line_colors = cm.YlOrRd(np.linspace(0.3, 1, a.item_num))
 a.img_name = "StanderWeapon4"
 a.img_title = "原神常驻祈愿抽取特定四星武器概率"
-a.img_description = "获取一个物品的期望抽数为"+str(round(calc_obj.item_expectation*calc_obj.stander_num, 2))+"抽\n无法保证在有限抽数内获得指定四星武器\n本图绘制时，常驻祈愿包含"+str(calc_obj.stander_num)+"种四星武器\n"
+
+text_note = "本算例中常驻祈愿中有"+str(calc_obj.stander_num)+"种四星武器\n"
+temp_obj = GGanalysislib.PityGacha()
+coupling_4star_p = GGanalysislib.calc_coupling_p(temp_obj.weapon_5star_pity(), temp_obj.weapon_4star_pity())
+text_up_expectation = "获取一个四星物品的期望为"+str(round(1/coupling_4star_p,2))+"抽\n"
+text_up_badcase = "无法保证在有限抽数内必能获得特定物品\n"
+a.img_description = text_model+text_note+text_up_expectation+text_up_badcase
 a.x_bias_num = -7.6          # x方向偏移量
 
 a.img_dpi = img_dpi
@@ -190,8 +214,7 @@ a.save_img = save_img               # 是否保存图片
 a.show_img = show_img               # 是否显示图片
 a.plot_img(calc_obj.get_distribution(a.item_num, 3900, 0).cumsum(axis=1))
 
-'''
-'''
+
 # 常驻祈愿抽齐五星角色
 calc_obj = GGanalysislib.Stander5StarCharacter()
 calc_obj.collect_all = 1
@@ -202,9 +225,12 @@ a.line_colors = cm.PuRd(np.linspace(0.5, 1, a.item_num))
 a.img_name = "GetAllStanderCharacter5"
 a.img_title = "原神集齐常驻祈愿五星角色概率"
 
-a.img_description = "集齐物品的期望抽数为"+"抽\n无法保证在有限抽数集齐常驻祈愿五星角色\n"
+text_note = "本算例中常驻祈愿中有"+str(calc_obj.stander_num)+"种五星角色\n"
+text_up_expectation = ""
+text_up_badcase = "无法保证在有限抽数内必能集齐\n"
+a.img_description = text_model+text_note+text_up_expectation+text_up_badcase
 a.x_bias_num = -7.6          # x方向偏移量
-a.mid_bias_num = -6
+a.mid_bias_num = -7
 
 a.img_dpi = img_dpi
 a.save_img = save_img               # 是否保存图片
@@ -222,33 +248,43 @@ a.fig_size_y = 12
 a.line_colors = cm.OrRd(np.linspace(0.4, 1, a.item_num))
 a.img_name = "GetAllStanderWeapon5"
 a.img_title = "原神集齐常驻祈愿五星武器概率"
-a.img_description = "集齐物品的期望抽数为"+"抽\n无法保证在有限抽数集齐常驻祈愿五星角色\n"
+
+text_note = "本算例中常驻祈愿中有"+str(calc_obj.stander_num)+"种五星武器\n"
+text_up_expectation = ""
+text_up_badcase = "无法保证在有限抽数内必能集齐\n"
+a.img_description = text_model+text_note+text_up_expectation+text_up_badcase
 a.x_bias_num = -7.6          # x方向偏移量
-a.mid_bias_num = -6
+a.mid_bias_num = -7
 
 a.img_dpi = img_dpi
 a.save_img = save_img               # 是否保存图片
 a.show_img = show_img               # 是否显示图片
 a.plot_img(calc_obj.get_distribution(a.item_num, 9500, 0).cumsum(axis=1))
 
-# 常驻祈愿抽齐四星
-calc_obj = GGanalysislib.Stander4StarCharacter()
+# 常驻祈愿抽齐某类四星
+from GGanalysislib.StanderItem.Stander4Star import Stander4Star
+calc_obj = Stander4Star()
 calc_obj.collect_all = 1
+calc_obj.stander_num = 18     # 计算时物品种类
 a = GGanalysislib.DrawTransCDF()
 a.item_num = 18
-a.total_item_types = 18       # 物品种类
+a.total_item_types = 18       # 画图物品种类
 a.fig_size_y = 20
 a.item_type = "Type"
 a.line_colors = cm.PuRd(np.linspace(0.5, 1, a.item_num))
-a.img_name = "GetAllStanderCharacter4"
-a.img_title = "原神集齐常驻祈愿四星概率"
+a.img_name = "GetAllStander4"
+a.img_title = "原神集齐常驻祈愿某类四星概率"
 
-a.img_description = "集齐物品的期望抽数为"+"抽\n无法保证在有限抽数集齐常驻祈愿四星角色\n"
+
+text_note = "本算例中常驻祈愿中有"+str(calc_obj.stander_num)+"种本类物品\n"
+text_up_expectation = ""
+text_up_badcase = "无法保证在有限抽数内必能集齐\n"
+a.img_description = text_model+text_note+text_up_expectation+text_up_badcase
 a.x_bias_num = -7.6          # x方向偏移量
-a.mid_bias_num = -6
+a.y_bias_num = 0.2
+a.mid_bias_num = -7
 
 a.img_dpi = img_dpi
 a.save_img = save_img               # 是否保存图片
 a.show_img = show_img               # 是否显示图片
-a.plot_img(calc_obj.get_distribution(a.item_num, 2400, 0).cumsum(axis=1))
-'''
+a.plot_img(calc_obj.get_distribution(a.item_num, 1500, 0).cumsum(axis=1))
