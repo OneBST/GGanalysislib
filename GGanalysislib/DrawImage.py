@@ -77,7 +77,7 @@ class DrawTransCDF():
                         # 50%处标注说明文字
                         if each_pos == 0.5:
                             put_tag = self.get_tag(i)
-                            plt.text(each_pos+loc_x_bias-5.5*x_bias, j+loc_y_bias, put_tag,
+                            plt.text(each_pos+loc_x_bias+self.mid_bias_num*x_bias, j+loc_y_bias, put_tag,
                                     c=self.line_colors[i-1],
                                     fontproperties=self.mark_font,
                                     path_effects=[pe.withStroke(linewidth=self.font_stroke_width, foreground="white")])
@@ -91,7 +91,7 @@ class DrawTransCDF():
                 horizontalalignment='left',
                 verticalalignment='top')
         if self.save_img:
-            plt.savefig('./fig/'+self.img_name+'.png')  # , bbox_inches='tight' , pad_inches=0
+            plt.savefig('./fig/'+self.img_name+'.png', bbox_inches='tight' , pad_inches=0.1)  # 
         if self.show_img:
             plt.show()
 
@@ -116,6 +116,7 @@ class DrawTransCDF():
         self.bias_rate = 100            # 字体偏置比例
         self.x_bias_num = -5.8          # x方向偏移量
         self.y_bias_num = 0.5           # y方向偏移量
+        self.mid_bias_num = -5.5        # 中部偏移量
         # 设置绘图字体
         self.text_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Medium.otf", size=10)
         self.title_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Bold.otf", size=15)

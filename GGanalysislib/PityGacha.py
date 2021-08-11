@@ -5,14 +5,51 @@ def LoadDLL():  # Python3.8后Windows下加载动态链接库的安全性更新
     return ctypes.CDLL("./bin/GGanalysis.dll")  # 指明具体位置
 
 class PityGacha():
-    def init_pity_p(self):  # 初始化概率提升表，继承时候需要重写
-        self.pity_p = np.zeros(self.pity_pos+1, dtype=float)
+    # 普通五星保底概率提升表
+    @classmethod
+    def common_5star_pity(cls):
+        pity_p = np.zeros(91, dtype=float)
         for i in range(1, 74):
-            self.pity_p[i] = 0.006
+            pity_p[i] = 0.006
         for i in range(74, 91):
-            self.pity_p[i] = 0.06 + self.pity_p[i-1]
-        self.pity_p[90] = 1
-
+            pity_p[i] = 0.06 + pity_p[i-1]
+        pity_p[90] = 1
+        return pity_p
+    # 普通四星保底概率提升表
+    @classmethod
+    def common_4star_pity(cls):
+        pity_p = np.zeros(11, dtype=float)
+        for i in range(1, 9):
+            pity_p[i] = 0.051
+        pity_p[9] = 0.561
+        pity_p[10] = 1
+        return pity_p
+    # 五星武器保底概率提升表
+    @classmethod
+    def weapon_5star_pity(cls):
+        pity_p = np.zeros(81, dtype=float)
+        for i in range(1, 63):
+            pity_p[i] = 0.007
+        for i in range(63, 74):
+            pity_p[i] = pity_p[i-1] + 0.07
+        for i in range(74, 80):
+            pity_p[i] = pity_p[i-1] + 0.035
+        pity_p[80] = 1
+        return pity_p
+    # 四星武器保底概率提升表
+    @classmethod
+    def weapon_4star_pity(cls):
+        pity_p = np.zeros(11, dtype=float)
+        for i in range(1, 8):
+            pity_p[i] = 0.06
+        pity_p[8] = 0.66
+        pity_p[9] = 0.96   
+        pity_p[10] = 1
+        return pity_p
+        
+    def init_pity_p(self):  # 初始化概率提升表，继承时候需要重写
+        self.pity_p = self.common_5star_pity()
+    
     # 物品抽取分布列
     @classmethod
     def calc_simple_distribution(cls, pity_p):

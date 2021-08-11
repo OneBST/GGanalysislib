@@ -4,12 +4,7 @@ import numpy as np
 class Up4starWeapon(UpItem):
     # 对于UP四星进行了简化，忽略了五星及常驻四星对其的影响，造成计算概率略低
     def init_pity_p(self):
-        self.pity_p = np.zeros(self.pity_pos+1, dtype=float)
-        for i in range(1, 8):
-            self.pity_p[i] = 0.06
-        self.pity_p[8] = 0.66
-        self.pity_p[9] = 0.96   
-        self.pity_p[10] = 1
+        self.pity_p = self.weapon_4star_pity()
     def set_const(self):
         # 保底参数
         self.pity_pos = 10          # 保底位置

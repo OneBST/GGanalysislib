@@ -56,6 +56,8 @@ class UpItem(PityGacha):
                     up_guarantee = 1
         # 限界模拟到end_pos
         return counter
+    def calc_reference_upitem_expectation(self):
+        return (2 - self.up_rate) * self.up_type * self.item_expectation
     # 物品抽取基本统计量
     def init_item_statistics(self):
         # 分布列
@@ -65,7 +67,7 @@ class UpItem(PityGacha):
         # 抽取本等级物品的方差
         self.item_variance = self.calc_pull_variance(self.item_distribution)
         # 抽取UP物品参考期望
-        self.reference_upitem_expectation = (2 - self.up_rate) * self.up_type * self.item_expectation
+        self.reference_upitem_expectation = self.calc_reference_upitem_expectation()
     def set_const(self):
         # 保底参数
         self.pity_pos = 90          # 保底位置

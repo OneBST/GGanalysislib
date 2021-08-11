@@ -4,14 +4,7 @@ import numpy as np
 class Up5starWeaponOld(UpItem):
     # 没有神铸定轨的武器池
     def init_pity_p(self):
-        self.pity_p = np.zeros(self.pity_pos+1, dtype=float)
-        for i in range(1, 63):
-            self.pity_p[i] = 0.007
-        for i in range(63, 74):
-            self.pity_p[i] = self.pity_p[i-1] + 0.07
-        for i in range(74, 80):
-            self.pity_p[i] = self.pity_p[i-1] + 0.035
-        self.pity_p[80] = 1
+        self.pity_p = self.weapon_5star_pity()
     def set_const(self):
         # 保底参数
         self.pity_pos = 80          # 保底位置

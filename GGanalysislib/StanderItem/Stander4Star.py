@@ -4,11 +4,7 @@ from GGanalysislib.StanderItem.StanderItem import StanderItem
 class Stander4Star(StanderItem):
     # 对于UP四星进行了简化，忽略了五星及常驻四星对其的影响，造成计算概率略低
     def init_pity_p(self):
-        self.pity_p = np.zeros(self.pity_pos+1, dtype=float)
-        for i in range(1, 9):
-            self.pity_p[i] = 0.051
-        self.pity_p[9] = 0.561
-        self.pity_p[10] = 1
+        self.pity_p = self.common_4star_pity()
     # 设置平稳参数
     def init_hit_p(self):
         self.hit_p = np.zeros(self.hit_pos+1, dtype=float)

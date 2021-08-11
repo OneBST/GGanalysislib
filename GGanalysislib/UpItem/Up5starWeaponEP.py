@@ -27,7 +27,9 @@ class Up5starWeaponEP(Up5starWeaponOld):
                                 self.up_in_stander,                 # UP物品在常驻池中的数量
                                 self.stander_num)                   # 常驻池中物品数量
         return dp_ans
-
+    def calc_reference_upitem_expectation(self):
+        # 这里直接套用结论值
+        return self.item_expectation/0.5039
     # 模拟方法 用于检查DP正确性
     def simulate_pull(self, pull_state=0, up_guarantee=0, end_pos=300):
         import random
