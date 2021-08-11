@@ -5,3 +5,5 @@ test.py
 check.csv
 check.xlsx
 *.png
+temp.py
+temp.csv

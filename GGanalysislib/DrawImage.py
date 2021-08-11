@@ -43,6 +43,7 @@ class DrawTransCDF():
         # https://stackoverflow.com/questions/9127434/how-to-create-major-and-minor-gridlines-with-different-linestyles-in-python
         plt.grid(b=True, which='major', color='lightgray', linestyle='-', linewidth=1)
         plt.grid(b=True, which='minor', color='lightgray', linestyle='-', linewidth=0.5)
+        plt.minorticks_on()  # https://stackoverflow.com/questions/9127434/how-to-create-major-and-minor-gridlines-with-different-linestyles-in-python
 
         # 设置字体偏置
         if self.open_mark_bias:
@@ -90,7 +91,6 @@ class DrawTransCDF():
                                     fontproperties=self.mark_font,
                                     path_effects=[pe.withStroke(linewidth=self.font_stroke_width, foreground="white")])
         plt.title(self.img_title, fontproperties=self.title_font)
-        plt.minorticks_on()  # https://stackoverflow.com/questions/9127434/how-to-create-major-and-minor-gridlines-with-different-linestyles-in-python
         plt.xlabel("抽到概率", fontproperties=self.text_font)
         plt.ylabel("投入抽数", fontproperties=self.text_font)
         plt.text(0, calc_pull, self.img_description+"@一棵平衡树", c='#B0B0B0',

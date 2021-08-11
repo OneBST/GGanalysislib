@@ -56,6 +56,17 @@ def calc_coupling_p(p_a, p_b):
     # 解线性方程求解
     ans = np.linalg.solve(M, X)
     
+    '''
+    # 低优先度物品分布计算
+    ans2 = np.zeros(pos_b+1, dtype=float)
+    for i in range(pos_a-1):
+        for j in range(0, pos_b-1):
+            trans_p = min(1-p_a[i+1], p_b[j+1])
+            ans2[j+1] += ans[i*pos_b + j] * trans_p
+        trans_p = min(1-p_a[i+1], 1)
+        ans2[pos_b] += ans[i*pos_b + pos_b-1] * trans_p
+    print(ans2/ans2.sum())  
+    '''
 
     # stable_p_a = 0
     stable_p_b = 0
