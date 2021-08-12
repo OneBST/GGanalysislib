@@ -1,6 +1,6 @@
-./bin/GGanalysis.dll :./source/GGanalysis.o
-	gcc -o ./bin/GGanalysis.dll ./source/GGanalysis.o -s -shared -Wl,--subsystem,windows
-./source/GGanalysis.o : ./source/GGanalysis.c ./source/GGanalysis.h
-	gcc -c -o ./source/GGanalysis.o ./source/GGanalysis.c -O2 -D API_EXPORTS
+./GGanalysislib/bin/GGanalysis.dll :./GGanalysislib/source/GGanalysis.o
+	gcc -o ./GGanalysislib/bin/GGanalysis.dll ./GGanalysislib/source/GGanalysis.o -s -shared -Wl,--subsystem,windows
+./GGanalysislib/source/GGanalysis.o : ./GGanalysislib/source/GGanalysis.c ./GGanalysislib/source/GGanalysis.h
+	gcc -c -o ./GGanalysislib/source/GGanalysis.o ./GGanalysislib/source/GGanalysis.c -O2 -D API_EXPORTS
 clean :
-	del ./source/*.o
+	del ./GGanalysislib/source/*.o

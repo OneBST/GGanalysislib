@@ -2,7 +2,7 @@ import numpy as np
 import ctypes
 
 def LoadDLL():  # Python3.8后Windows下加载动态链接库的安全性更新
-    return ctypes.CDLL("./bin/GGanalysis.dll")  # 指明具体位置
+    return ctypes.CDLL("./GGanalysislib/bin/GGanalysis.dll")  # 指明具体位置
 
 class PityGacha():
     # 普通五星保底概率提升表
