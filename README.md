@@ -4,6 +4,8 @@
 
 工具包默认采用的抽卡模型见[原神抽卡全机制总结](https://www.bilibili.com/read/cv10468091)
 
+工具包绘制图表见[原神抽卡概率工具表](https://www.bilibili.com/read/cv12616453)
+
 样例程序为example.py
 
 ### 规划列表
