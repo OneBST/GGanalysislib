@@ -8,6 +8,8 @@
 
 样例程序为example.py
 
+运行draw_img.py可以绘制出各种抽数分布图（常驻祈愿分布图绘制会比较慢）
+
 ### Python依赖及安装
 #### Python依赖
 1. numpy
