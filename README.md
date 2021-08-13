@@ -19,6 +19,6 @@
 
 [GGanalysislib/bin](GGanalysislib/bin)下存放了工具包需要的动态链接库
 
-Windows下使用的GGanalysis.dll由MinGW编译
-
-Linux下使用libGGanalysis.so，编译需将makefile.linux重命名为makefile，使用gcc来make即可
+- Windows下使用的GGanalysis.dll由MinGW编译，直接在根目录下make即可
+- Linux下使用libGGanalysis.so，编译需将makefile.linux重命名为makefile，再在根目录使用gcc来make即可
+- macOS下编译过程和Linux相同
