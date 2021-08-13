@@ -38,3 +38,4 @@
 
 在macOS上第一次使用时，需要在根目录下执行一次`make`以编译可用的二进制文件
 
+如果你的mac上没有编译工具，可将[GGanalysislib/bin](GGanalysislib/bin)中的libGGanalysis.macos重命名并替换原有的libGGanalysis.so文件，即可正常使用
