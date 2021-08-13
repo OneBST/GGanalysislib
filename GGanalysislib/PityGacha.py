@@ -1,8 +1,12 @@
 import numpy as np
 import ctypes
+import sys
 
 def LoadDLL():  # Python3.8后Windows下加载动态链接库的安全性更新
-    return ctypes.CDLL("./GGanalysislib/bin/GGanalysis.dll")  # 指明具体位置
+    if sys.platform == "win32":  # windows下的动态链接库
+        return ctypes.CDLL("./GGanalysislib/bin/GGanalysis.dll")  # 指明具体位置
+    else:  # 其他系统加载文件
+        return ctypes.CDLL("./GGanalysislib/bin/libGGanalysis.so")  # 指明具体位置
 
 class PityGacha():
     # 普通五星保底概率提升表
