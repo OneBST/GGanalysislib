@@ -1,6 +1,0 @@
-./GGanalysislib/bin/libGGanalysis.so :./source/GGanalysis.o
-	gcc -shared -o ./GGanalysislib/bin/libGGanalysis.so ./source/GGanalysis.o
-./source/GGanalysis.o : ./source/GGanalysis.c ./source/GGanalysis.h
-	gcc -c -fPIC -o ./source/GGanalysis.o ./source/GGanalysis.c -O2 -D API_EXPORTS
-clean :
-	rm ./GGanalysislib/source/*.o
