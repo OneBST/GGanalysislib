@@ -19,8 +19,5 @@
 
 [GGanalysislib/bin](GGanalysislib/bin)下存放了工具包需要的动态链接库
 
-在第一次使用时，需要在根目录下执行一次`make`以编译可用的二进制文件
+在macOS上第一次使用时，需要在根目录下执行一次`make`以编译可用的二进制文件
 
-### 图片样例
-
-![img](https://i0.hdslb.com/bfs/article/a78913e871d17bdf978626df6a90afeb5b3b38c1.png@942w_1079h_progressive.webp)
