@@ -14,3 +14,11 @@
 - [ ] 编写工具包函数说明
 - [ ] 制作一个简易的图形界面
 - [ ] 编写分析UP物品抽取运气的函数
+
+### 动态库Linux编译说明
+
+[GGanalysislib/bin](GGanalysislib/bin)下存放了工具包需要的动态链接库
+
+Windows下使用的GGanalysis.dll由MinGW编译
+
+Linux下使用libGGanalysis.so，编译需将makefile.linux重命名为makefile，使用gcc来make即可
