@@ -7,3 +7,4 @@ check.xlsx
 *.png
 temp.py
 temp.csv
+.DS_Store
