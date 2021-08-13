@@ -10,6 +10,21 @@
 
 运行draw_img.py可以绘制出各种抽数分布图（常驻祈愿分布图绘制会比较慢）
 
+### Python依赖及安装
+#### Python依赖
+1. numpy
+2. matplotlib
+#### 安装方式
+1. 打开终端（Windows下可按快捷键`Win+r`后输入`cmd`并运行；macOS下按快捷键`command+空格`呼出spotlight，输入`terminal`或`终端（仅当系统语言为中文时）`后选择terminal.app）
+
+2. 输入命令：
+
+	```bash
+	python3 -m pip install numpy matplotlib
+	```
+
+	\* Python路径可能根据个人电脑运行环境不同而变化；在Windows环境下，可能需要将Python添加到`PATH`环境变量中；在macOS及Linux环境下，请善用`which`命令确认当前使用的python路径
+
 ### 规划列表
 
 - [ ] 将抽卡模拟器做的更易使用并合并到项目中
