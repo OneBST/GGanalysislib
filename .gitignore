@@ -1,10 +1,15 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/ 
 *.pyc
-test.py
+
+# temp files
 *.o
 check.csv
 check.xlsx
 *.png
-temp.py
 temp.csv
+
+# test files
+test.py
+temp.py
 .DS_Store
