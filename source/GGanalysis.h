@@ -9,15 +9,28 @@
 #include <omp.h>
 #endif
 */
+// https://www.transmissionzero.co.uk/computing/building-dlls-with-mingw/
 /* You should define ADD_EXPORTS *only* when building the DLL. */
-#ifdef API_EXPORTS
-    #define API_FUNC __declspec(dllexport)
-#else
-    #define API_FUNC __declspec(dllimport)
+#ifdef _WIN32
+
+    /* You should define ADD_EXPORTS *only* when building the DLL. */
+    #ifdef API_EXPORTS
+        #define API_FUNC __declspec(dllexport)
+    #else
+        #define API_FUNC __declspec(dllimport)
+    #endif
+
+  /* Define calling convention in one place, for convenience. */
+  #define APICALL __cdecl
+
+#else /* _WIN32 not defined. */
+
+    /* Define with no value on non-Windows OSes. */
+    #define API_FUNC
+    #define APICALL
+
 #endif
 
-/* Define calling convention in one place, for convenience. */
-#define APICALL __cdecl
 
 /* Make sure functions are exported with C linkage under C++ compilers. */
 
