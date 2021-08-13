@@ -22,3 +22,5 @@
 - Windows下使用的GGanalysis.dll由MinGW编译，直接在根目录下make即可
 - Linux下使用libGGanalysis.so，编译需将makefile.linux重命名为makefile，再在根目录使用gcc来make即可
 - macOS下编译过程和Linux相同
+
+![img](https://i0.hdslb.com/bfs/article/a78913e871d17bdf978626df6a90afeb5b3b38c1.png@942w_1079h_progressive.webp)
