@@ -7,6 +7,16 @@ import math
 
 class DrawTransCDF():
     def get_tag(self, num):
+        if self.en_switch:
+            if self.item_type == "Character":
+                return 'C' + str(num-1)
+            if self.item_type == "Type":
+                if num == self.total_item_types:
+                    return 'ALL'
+                return str(num)
+            if self.item_type == 'Weapon':
+                return 'R' + str(num) 
+            return 'TYPE SET ERROR!'
         if self.item_type == "Character":
             return str(num-1) + '命'
         if self.item_type == "Type":
@@ -91,9 +101,9 @@ class DrawTransCDF():
                                     fontproperties=self.mark_font,
                                     path_effects=[pe.withStroke(linewidth=self.font_stroke_width, foreground="white")])
         plt.title(self.img_title, fontproperties=self.title_font)
-        plt.xlabel("抽到概率", fontproperties=self.text_font)
-        plt.ylabel("投入抽数", fontproperties=self.text_font)
-        plt.text(0, calc_pull, self.img_description+"@一棵平衡树", c='#B0B0B0',
+        plt.xlabel(self.xlabel, fontproperties=self.text_font)
+        plt.ylabel(self.ylabel, fontproperties=self.text_font)
+        plt.text(0, calc_pull, self.img_description+self.auther, c='#B0B0B0',
                 fontproperties=self.mark_font,
                 path_effects=[pe.withStroke(linewidth=self.font_stroke_width, foreground="white")],
                 horizontalalignment='left',
@@ -129,6 +139,11 @@ class DrawTransCDF():
         self.text_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Medium.otf", size=10)
         self.title_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Bold.otf", size=15)
         self.mark_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Bold.otf", size=10)
+        # 设置图示语言
+        self.en_switch = 0
+        self.xlabel = "抽到概率"
+        self.ylabel = "投入抽数"
+        self.auther = "@一棵平衡树"
         # 设置线条颜色
         # https://stackoverflow.com/questions/12236566/setting-different-color-for-each-series-in-scatter-plot-on-matplotlib
         self.line_colors = cm.Blues(np.linspace(0.5, 0.9, self.item_num))
