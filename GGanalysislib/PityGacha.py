@@ -109,32 +109,10 @@ class PityGacha():
         return dp_ans[calc_pull]
     
     # 简单的运气评价 看看超过了%多少人 仅仅适用于五星数量衡量
-    def luck_evaluate(self, item_num, use_pull, leave_pull):
-        dp_ans = self.get_distribution(item_num, use_pull, 0)
-        # 计算 “没抽到” 辅助数组oops
-        oops = np.zeros(self.pity_pos+1, dtype=float)
-        temp_state = 1
-        oops[0] = 1
-        for i in range(1, self.pity_pos+1):
-            temp_state = temp_state * (1 - self.pity_p[i])
-            oops[i] = temp_state
-        ans = 0  # 记录超越了多少人
-        dp_ans[0][0] = 1  # 修正0处
-        for i in range(item_num+1):  # 抽了多少个
-            calc_end_pos = self.pity_pos
-            if i == item_num:
-                calc_end_pos = leave_pull
-            for j in range(calc_end_pos):  # 额外垫了多少抽
-                # print('五星数'+str(i)+' 垫抽数'+str(j))
-                if use_pull-j < 0:
-                    break
-                ans += dp_ans[i][use_pull-j] * oops[j]
-        return ans
-    # dll运气评价测试
-    def luck_evaluate_dll(self, get_num, used_pull, left_pull):
+    def luck_evaluate(self, get_num, used_pull, left_pull):
         # 调用动态链接库
         Objdll = LoadDLL()
-        Objdll.rank_common.restype = ctypes.c_double
+        Objdll.rank_common_item.restype = ctypes.c_double
         pity_p_ptr = self.pity_p.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
         return Objdll.rank_common_item(
             get_num,            #已有物品抽取数量
