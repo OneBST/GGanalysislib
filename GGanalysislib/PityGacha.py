@@ -126,14 +126,14 @@ class PityGacha():
         return dp_ans[calc_pull]
     
     # 简单的运气评价 看看超过了%多少人 仅仅适用于五星数量衡量
-    def luck_evaluate(self, get_num, used_pull, left_pull=0):
+    def luck_evaluate(self, get_num, use_pull, left_pull=0):
         # 调用动态链接库
         Objdll = LoadDLL()
         Objdll.rank_common_item.restype = ctypes.c_double
         pity_p_ptr = self.pity_p.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
         return Objdll.rank_common_item(
             get_num,            #已有物品抽取数量
-            used_pull,          #总共抽取次数
+            use_pull,          #总共抽取次数
             left_pull,          #距离获得上个物品又抽了多少
             pity_p_ptr,         #概率提升表
             self.pity_pos)      #保底抽数

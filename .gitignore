@@ -8,6 +8,7 @@ check.csv
 check.xlsx
 *.png
 temp.csv
+temp_plot.py
 
 # test files
 test.py
