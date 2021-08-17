@@ -173,11 +173,11 @@ void APICALL GI_upitem_DP(
                 //其他UP
                 if(up_type>1)
                 {
-                    M[i][j][1] += up_rate * M[i][last_pos][0] * (1-up_trans) * p_trans[pull];
-                    M[i][j][1] += up_rate * M[i][last_pos][1] * (1-up_trans) * p_trans[pull];
-                    M[i][j][1] += stander_other * (1-up_rate) * M[i][last_pos][0] * p_trans[pull];
-                    M[i][j][1] += stander_other * (1-up_rate) * M[i][last_pos][1] * p_trans[pull];
-                    M[i][j][1] += M[i][last_pos][2] * (1-up_trans) * p_trans[pull];
+                    M[i][j][1] += up_rate * M[i][last_pos][0] * (1.0-up_trans) * p_trans[pull];
+                    M[i][j][1] += up_rate * M[i][last_pos][1] * (1.0-up_trans) * p_trans[pull];
+                    M[i][j][1] += stander_other * (1.0-up_rate) * M[i][last_pos][0] * p_trans[pull];
+                    M[i][j][1] += stander_other * (1.0-up_rate) * M[i][last_pos][1] * p_trans[pull];
+                    M[i][j][1] += M[i][last_pos][2] * (1.0-up_trans) * p_trans[pull];
                 }            
                 //非UP
                 M[i][j][2] += stander_notup * (1-up_rate) * M[i][last_pos][0] * p_trans[pull];
@@ -289,20 +289,20 @@ void APICALL GI_weapon_EP_DP(
                     M[i][j][0] += up_rate * M[i-1][last_pos][0] * up_trans * p_trans[pull];
                     M[i][j][0] += up_rate * M[i-1][last_pos][1] * up_trans * p_trans[pull];
                     M[i][j][0] += M[i-1][last_pos][3] * p_trans[pull];
-                    M[i][j][0] += stander_trans * (1-up_rate) * M[i-1][last_pos][0] * p_trans[pull];
-                    M[i][j][0] += stander_trans * (1-up_rate) * M[i-1][last_pos][1] * p_trans[pull];
+                    M[i][j][0] += stander_trans * (1.0-up_rate) * M[i-1][last_pos][0] * p_trans[pull];
+                    M[i][j][0] += stander_trans * (1.0-up_rate) * M[i-1][last_pos][1] * p_trans[pull];
                     M[i][j][0] += M[i-1][last_pos][2] * up_trans * p_trans[pull];
                 }
                 //抽到不想要UP  命定值为1
                 M[i][j][1] += up_rate * M[i][last_pos][0] * (1-up_trans) * p_trans[pull];
-                M[i][j][1] += stander_other * (1-up_rate) * M[i][last_pos][0] * p_trans[pull];
+                M[i][j][1] += stander_other * (1.0-up_rate) * M[i][last_pos][0] * p_trans[pull];
                 //抽到了常驻    命定值为1
-                M[i][j][2] += stander_notup * (1-up_rate) * M[i][last_pos][0] * p_trans[pull];
+                M[i][j][2] += stander_notup * (1.0-up_rate) * M[i][last_pos][0] * p_trans[pull];
                 //             命定值为2
                 M[i][j][3] += up_rate * M[i][last_pos][1] * (1-up_trans) * p_trans[pull];
-                M[i][j][3] += stander_other * (1-up_rate) * M[i][last_pos][1] * p_trans[pull];
-                M[i][j][3] += stander_notup * (1-up_rate) * M[i][last_pos][1] * p_trans[pull];
-                M[i][j][3] += M[i][last_pos][2] * (1-up_trans) * p_trans[pull];
+                M[i][j][3] += stander_other * (1.0-up_rate) * M[i][last_pos][1] * p_trans[pull];
+                M[i][j][3] += stander_notup * (1.0-up_rate) * M[i][last_pos][1] * p_trans[pull];
+                M[i][j][3] += M[i][last_pos][2] * (1.0-up_trans) * p_trans[pull];
             }
         }
     }

@@ -70,6 +70,23 @@ class PityGacha():
         for i in range(1, len(item_distribution)):
             item_expectation += item_distribution[i] * i
         return item_expectation
+    @classmethod
+    def calc_pull_expectation_solve_equation(cls, pity_p):
+        pity_pos = len(pity_p)-1
+        # 构造矩阵
+        M = np.zeros((pity_pos, pity_pos), dtype=float)
+        for i in range(1, pity_pos):
+            M[i][i-1] = 1 - pity_p[i]
+        for i in range(pity_pos):
+            M[0][i] = pity_p[i+1]
+        M = M - np.identity(pity_pos)   # 减去对角阵
+        M[pity_pos-1] = 1               # 末行设置为1
+        # 设置向量
+        X = np.zeros(pity_pos, dtype=float)
+        X[pity_pos-1] = 1
+        # 解线性方程求解
+        ans = np.linalg.solve(M, X)
+        return 1/ans[0]
     # 物品抽取抽数方差
     @classmethod
     def calc_pull_variance(cls, item_distribution):
@@ -109,7 +126,7 @@ class PityGacha():
         return dp_ans[calc_pull]
     
     # 简单的运气评价 看看超过了%多少人 仅仅适用于五星数量衡量
-    def luck_evaluate(self, get_num, used_pull, left_pull):
+    def luck_evaluate(self, get_num, used_pull, left_pull=0):
         # 调用动态链接库
         Objdll = LoadDLL()
         Objdll.rank_common_item.restype = ctypes.c_double
