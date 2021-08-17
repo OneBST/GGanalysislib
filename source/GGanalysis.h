@@ -31,7 +31,6 @@
 
 #endif
 
-
 /* Make sure functions are exported with C linkage under C++ compilers. */
 
 #ifdef __cplusplus

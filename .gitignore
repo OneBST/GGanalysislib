@@ -13,3 +13,6 @@ temp.csv
 test.py
 temp.py
 .DS_Store
+
+# vs code setting
+.vscode/

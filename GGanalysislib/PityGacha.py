@@ -118,12 +118,10 @@ class PityGacha():
         for i in range(1, self.pity_pos+1):
             temp_state = temp_state * (1 - self.pity_p[i])
             oops[i] = temp_state
-        luck_check_shape = [item_num+1, self.pity_pos+1]
-        luck_check = np.zeros(luck_check_shape, dtype=float)
         ans = 0  # 记录超越了多少人
         dp_ans[0][0] = 1  # 修正0处
         for i in range(item_num+1):  # 抽了多少个
-            calc_end_pos = 90
+            calc_end_pos = self.pity_pos
             if i == item_num:
                 calc_end_pos = leave_pull
             for j in range(calc_end_pos):  # 额外垫了多少抽
@@ -132,15 +130,25 @@ class PityGacha():
                     break
                 ans += dp_ans[i][use_pull-j] * oops[j]
         return ans
-    
+    # dll运气评价测试
+    def luck_evaluate_dll(self, get_num, used_pull, left_pull):
+        # 调用动态链接库
+        Objdll = LoadDLL()
+        Objdll.rank_common.restype = ctypes.c_double
+        pity_p_ptr = self.pity_p.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
+        return Objdll.rank_common_item(
+            get_num,            #已有物品抽取数量
+            used_pull,          #总共抽取次数
+            left_pull,          #距离获得上个物品又抽了多少
+            pity_p_ptr,         #概率提升表
+            self.pity_pos)      #保底抽数
+                
     # 模拟一下看看运气评价对不对
-    def simulate_luck(self, use_pull, item_num, leave_pull):
+    def simulate_luck(self, item_num, use_pull, leave_pull):
         import random
-        counter = 0  # 抽数计数器
         pull_state = 0  #状态记录器
         item_counter = 0  # 物品计数器
-        while counter <= use_pull:
-            counter += 1
+        for i in range(use_pull):
             pull_state += 1
             # 抽到了物品
             if self.pity_p[pull_state] >= random.random():
@@ -151,9 +159,9 @@ class PityGacha():
                     return 0
         if item_counter < item_num:
             return 1  # 运气更差
-        if pull_state > leave_pull:
-            return 0  # 运气更好
-        return 1  # 运气相同或者更差
+        if pull_state >= leave_pull:  # 剩下抽数多或相同
+            return 0  # 运气更好或相同
+        return 1  # 运气更差
     def set_const(self):
         self.pity_pos = 90  # 保底位置
     def __init__(self):

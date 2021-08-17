@@ -56,6 +56,10 @@ class UpItem(PityGacha):
                     up_guarantee = 1
         # 限界模拟到end_pos
         return counter
+
+    # 简单的运气评价 看看超过了%多少人 仅仅适用于UP五星数量衡量
+    # def luck_evaluate(self, item_num, use_pull, leave_pull):
+        
     def calc_reference_upitem_expectation(self):
         return (2 - self.up_rate) * self.up_type * self.item_expectation
     # 物品抽取基本统计量

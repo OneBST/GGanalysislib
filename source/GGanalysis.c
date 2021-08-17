@@ -53,7 +53,7 @@ double* calc_distribution(double* pity_p, int pity_pos)
     for(i=1; i<=pity_pos; i++)
     {
         ans[i] = state * pity_p[i];
-        state = state * (1 - pity_p[i]);
+        state = state * (1.0 - pity_p[i]);
     }
     return ans;
 }
@@ -74,7 +74,6 @@ void APICALL pity_item_DP(
     double* temp_storage = malloc((item_num+1) * (calc_pull+1) * sizeof(double));
     for(i=0; i<(item_num+1)*(calc_pull+1); i++)
         temp_storage[i] = 0;
-    //M中最后一个维度 0表示抽到想要UP 1表示抽到不想要UP 2表示没抽到UP
     M = build_2D_index(temp_storage, item_num+1, calc_pull+1);
     
     //用于状态转移的概率 从恰好抽到一个物品转移到恰好抽到另一个物品
