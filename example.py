@@ -66,6 +66,16 @@ player = GGanalysislib.Up5starCharacter()
 print("总共抽了100抽，出了1个UP五星，还垫了60抽, 有大保底")
 print("你的运气击败了"+str(round(100*player.luck_evaluate(get_num=1, use_pull=100, left_pull=60, up_guarantee=1), 2))+"%的玩家")
 
+# 其他复合情况
+# 639抽抽到5个UP角色和1个定轨武器的概率是多少 注意这个没考虑策略，只是傻乎乎的抽到满足标准的概率
+import scipy.signal
+import numpy as np
+test_obj = GGanalysislib.Up5starCharacter()
+A = test_obj.get_distribution(5, 5*180, 0 , 0)[5]
+test_obj = GGanalysislib.Up5starWeaponEP()
+B = test_obj.get_distribution(1, 240, 0 , 0)[1]
+C = scipy.signal.convolve(A, B)  # 卷积一下就得到了复合
+print(sum(C[0:639+1]))
 
 
 # 模型参数重设
