@@ -139,7 +139,7 @@ class PityGacha():
             self.pity_pos)      #保底抽数
                 
     # 模拟一下看看运气评价对不对
-    def simulate_luck(self, item_num, use_pull, leave_pull):
+    def simulate_luck(self, item_num, use_pull, left_pull):
         import random
         pull_state = 0  #状态记录器
         item_counter = 0  # 物品计数器
@@ -154,7 +154,7 @@ class PityGacha():
                     return 0
         if item_counter < item_num:
             return 1  # 运气更差
-        if pull_state >= leave_pull:  # 剩下抽数多或相同
+        if pull_state >= left_pull:  # 剩下抽数多或相同
             return 0  # 运气更好或相同
         return 1  # 运气更差
     def set_const(self):

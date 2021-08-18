@@ -57,24 +57,16 @@ class UpItem(PityGacha):
         # 限界模拟到end_pos
         return counter
 
-    # 简单的运气评价 看看超过了%多少人 仅仅适用于UP五星数量衡量
-    def luck_evaluate(self, get_num, used_pull, left_pull=0, up_guarantee=0):
-        # 调用动态链接库
-        Objdll = LoadDLL()
-        Objdll.rank_up_item.restype = ctypes.c_double
-        pity_p_ptr = self.pity_p.ctypes.data_as(ctypes.POINTER(ctypes.c_double))
-        return Objdll.rank_up_item(
-            get_num,                            # 已有物品抽取数量
-            used_pull,                          # 总共抽取次数
-            left_pull,                          # 距离获得上个物品又抽了多少
-            up_guarantee,                       # 大保底情况
-            pity_p_ptr,                         # 概率提升表
-            self.pity_pos,                      # 保底抽数
-            ctypes.c_double(self.up_rate),      # UP概率
-            self.up_type)                       # UP物品种类      
-        
     def calc_reference_upitem_expectation(self):
         return (2 - self.up_rate) * self.up_type * self.item_expectation
+    
+    # 计算条件期望
+    def calc_conditional_expectation(self):
+        self.C_expactation = np.zeros(self.pity_pos, dtype=float)
+        self.C_expactation[self.pity_pos-1] = 1
+        for i in range(self.pity_pos-2, -1, -1):
+            self.C_expactation[i] = (self.C_expactation[i+1]+1) * (1-self.pity_p[i+1]) + self.pity_p[i+1]
+    
     # 物品抽取基本统计量
     def init_item_statistics(self):
         # 分布列
@@ -85,6 +77,8 @@ class UpItem(PityGacha):
         self.item_variance = self.calc_pull_variance(self.item_distribution)
         # 抽取UP物品参考期望
         self.reference_upitem_expectation = self.calc_reference_upitem_expectation()
+        # 计算条件期望
+        self.calc_conditional_expectation()
     def set_const(self):
         # 保底参数
         self.pity_pos = 90          # 保底位置

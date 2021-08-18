@@ -23,14 +23,14 @@ double APICALL rank_common_item(
     double* p_fail;     //从恰好抽到一个物品转移到再用i抽没有抽到物品
     p_trans = malloc((pity_pos+1) * sizeof(double));
     p_fail  = malloc((pity_pos+1) * sizeof(double));
-    double state = 1;
+    double state = 1.0;
     for(i=1; i<=pity_pos; i++)
     {
         p_trans[i] = state * pity_p[i];
         state = state * (1.0 - pity_p[i]);
         p_fail[i]  = state;
     }
-    p_fail[0] = 1;      //垫了0抽辅助概率
+    p_fail[0] = 1.0;      //垫了0抽辅助概率
 
     //设置DP初始条件
     M[0][0] = 1;
@@ -100,7 +100,7 @@ double APICALL rank_up_item(
     //设置DP初始条件
     M[0][0][0] = 1;
 
-    double up_trans;        //多UP选中想要角色的概率
+    double up_trans;        //多UP选中想要物品的概率
     int last_pos;           //开始转移概率位置
     up_trans = 1.0/(double)up_type;
     
@@ -139,30 +139,38 @@ double APICALL rank_up_item(
     for(i=pity_pos-2; i>=0; i--)
         conditional_expectation[i] = (conditional_expectation[i+1]+1) * (1-pity_p[i+1])
                                     + pity_p[i+1];
-        
+    // for(i=0; i<pity_pos; i++)
+    //     printf("%d %lf\n", i, conditional_expectation[i]);
+    // if(up_guarantee == 0)
+    //     printf("up_guarantee=0!\n");
     double ans = 0.0;
     int calc_end_pos;
     double refer_e;     //从零抽特定UP物品的期望
     double test_e;      //输入情况期望
     double case_e;      //列举条件的期望
     refer_e = (2.0-up_rate) * up_type *conditional_expectation[0];
-    if(up_guarantee == 0)//没有大保底情况下抽一个特定UP五星期望
+    // printf("up_rate=%lf up_type=%d refer_e=%lf\n", up_rate, up_type, refer_e);
+    if(up_guarantee == 0)//没有大保底情况下抽一个特定UP物品期望
+    {
         test_e =
             //抽到UP并抽到想要的UP 
             up_rate / up_type * conditional_expectation[left_pull] +   
             //抽到UP但没有抽到想要的UP
-            up_rate * ((up_type-1) / up_type) * (conditional_expectation[left_pull]+refer_e) +
+            up_rate * ((up_type-1.0) / up_type) * (conditional_expectation[left_pull]+refer_e) +
             //没抽到UP下一抽抽到UP
-            (1-up_rate) * (1 / up_type) * (conditional_expectation[left_pull]+conditional_expectation[0]) +
+            (1.0-up_rate) * (1.0 / up_type) * (conditional_expectation[left_pull]+conditional_expectation[0]) +
             //没抽到UP下一抽也没抽到UP
-            (1-up_rate) * ((up_type-1) / up_type) * (conditional_expectation[left_pull]+conditional_expectation[0]+refer_e);
-    else//有大保底情况下抽一个特定UP五星期望
+            (1.0-up_rate) * ((up_type-1.0) / up_type) * (conditional_expectation[left_pull]+conditional_expectation[0]+refer_e);
+        // printf("left_pull=%d C_e=%lf\n", left_pull, conditional_expectation[left_pull]);
+    }
+    else//有大保底情况下抽一个特定UP物品期望
         test_e =
             //抽到UP并抽到想要的UP
-            1 / up_type *conditional_expectation[left_pull] +
+            1.0 / up_type * conditional_expectation[left_pull] +
             //抽到UP但没有抽到想要的UP
-            ((up_type-1) / up_type) * (conditional_expectation[left_pull]+refer_e);               
-    printf("test_e = %lf\n", test_e);
+            ((up_type-1.0) / up_type) * (conditional_expectation[left_pull]+refer_e);
+    // printf("test_e = %lf\n", test_e);
+
     //将更差的情况加起来 对于有无大保底的情况按照再抽一个UP物品的期望抽数排序
     for(i=0; i<=get_num; i++)   //抽了多少个
     {
@@ -170,7 +178,7 @@ double APICALL rank_up_item(
         {
             if(use_pull - j < 0)
                 break;
-            if(i==get_num)
+            if(i==get_num)//抽到物品数量相同时，比较再抽一个物品的期望
                 case_e = 
                     //抽到UP并抽到想要的UP 
                     up_rate / up_type * conditional_expectation[j] +   
@@ -186,11 +194,12 @@ double APICALL rank_up_item(
                 ans += M[i][use_pull-j][1] * p_fail[j];
             }
             //枚举带有大保底的情况
-            case_e =
-                //抽到UP并抽到想要的UP
-                1 / up_type *conditional_expectation[j] +
-                //抽到UP但没有抽到想要的UP
-                ((up_type-1) / up_type) * (conditional_expectation[j]+refer_e);
+            if(i==get_num)
+                case_e =
+                    //抽到UP并抽到想要的UP
+                    1 / up_type *conditional_expectation[j] +
+                    //抽到UP但没有抽到想要的UP
+                    ((up_type-1) / up_type) * (conditional_expectation[j]+refer_e);
             // if(i==get_num)printf("GG: %d %lf\n", j, case_e);
             if(!((case_e <= test_e) && (i == get_num)))//如果不是更好或者相同的情况
                 ans += M[i][use_pull-j][2] * p_fail[j];
