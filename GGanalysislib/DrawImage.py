@@ -7,6 +7,8 @@ import math
 
 class DrawTransCDF():
     def get_tag(self, num):
+        if self.item_type == 'NULL':  # 留空判定
+                return '' 
         if self.en_switch:
             if self.item_type == "Character":
                 return 'C' + str(num-1)
