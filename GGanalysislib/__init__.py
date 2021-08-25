@@ -8,18 +8,21 @@
 
 from GGanalysislib.PityGacha import *
 
+# 各类活动祈愿对应的类
 from GGanalysislib.UpItem.Up5starCharacter import Up5starCharacter
 from GGanalysislib.UpItem.Up4starCharacter import Up4starCharacter
 from GGanalysislib.UpItem.Up5starWeaponOld import Up5starWeaponOld
 from GGanalysislib.UpItem.Up5starWeaponEP import Up5starWeaponEP
 from GGanalysislib.UpItem.Up4starWeapon import Up4starWeapon
-
+# 常驻祈愿对应的类
 from GGanalysislib.StanderItem.Stander5Star import Stander5StarCharacter
 from GGanalysislib.StanderItem.Stander5Star import Stander5StarWeapon
 from GGanalysislib.StanderItem.Stander4Star import Stander4StarCharacter
 from GGanalysislib.StanderItem.Stander4Star import Stander4StarWeapon
-
+# 绘图工具
 from GGanalysislib.DrawImage import DrawTransCDF
+from GGanalysislib.DrawImage import plot_distribution
+# 概率分析工具
 from GGanalysislib.PityCouplingP import calc_coupling_p
 
 if __name__ == '__main__':

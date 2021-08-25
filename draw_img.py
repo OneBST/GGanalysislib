@@ -159,7 +159,7 @@ a.plot_img(calc_obj.get_distribution(a.item_num, 600, 0).cumsum(axis=1))
 
 
 
-'''
+
 # 常驻祈愿抽五星角色
 calc_obj = GGanalysislib.Stander5StarCharacter()
 # a = GGanalysislib.DrawTransCDF()
@@ -324,4 +324,3 @@ a.img_dpi = img_dpi
 a.save_img = save_img               # 是否保存图片
 a.show_img = show_img               # 是否显示图片
 a.plot_img(calc_obj.get_distribution(a.item_num, 1500, 0).cumsum(axis=1))
-'''

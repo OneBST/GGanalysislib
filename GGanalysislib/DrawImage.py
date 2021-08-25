@@ -5,6 +5,8 @@ import matplotlib.patheffects as pe
 import matplotlib.cm as cm
 import math
 
+from numpy.core.fromnumeric import size
+
 class DrawTransCDF():
     def get_tag(self, num):
         if self.item_type == 'NULL':  # 留空判定
@@ -152,6 +154,64 @@ class DrawTransCDF():
 
         # 设置额外说明
         self.img_description = ''
+
+def plot_distribution(D):
+    # 输入的D为一维数组，从0开始
+    end_pull = len(D)
+
+    # 导入字体
+    text_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Medium.otf", size=10)
+    title_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Bold.otf", size=10)
+    mark_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Bold.otf", size=10)
+    
+    # 自适应偏移量
+    x_bias = end_pull / 100
+    y_bias = 1/ 100
+
+    # 绘图大小
+    plt.figure(figsize=(9, 8))
+
+    # 上图为累积分布函数
+    plt.subplot(211)
+    DD = D.cumsum()
+    plt.plot(range(end_pull), DD)
+    plt.title('累积分布函数', fontproperties=title_font)
+    plt.xlabel('抽数', fontproperties=text_font)
+    plt.ylabel('累积概率', fontproperties=text_font)
+    attention_pos = [0.1, 0.25, 0.5, 0.75, 0.9, 0.99]
+    for i in range(end_pull):   # 设置标记
+        for each_pos in attention_pos:
+            if DD[i] >= each_pos >= DD[i-1]:
+                # 打点标记
+                plt.scatter(i, DD[i], s=5, zorder=10, color='slateblue', 
+                            path_effects=[pe.withStroke(linewidth=2, foreground="white")])  
+                # 标记%和对应竖虚线
+                plt.axvline(x=i, c="lightgray", ls="--", lw=1, zorder=0)
+                plt.text(i+2.5*x_bias, each_pos-5*y_bias, str(i)+'抽  '+str(int(each_pos*100))+"%",
+                        c='gray',
+                        fontproperties=mark_font,
+                        path_effects=[pe.withStroke(linewidth=2, foreground="white")])
+
+    # 下图为分布列
+    plt.subplot(212)
+    plt.plot(range(end_pull), D, c='salmon')
+    plt.fill_between(range(end_pull), D, np.zeros(end_pull), alpha=0.2, color='salmon')
+    plt.title('分布列', fontproperties=title_font)
+    plt.xlabel('抽数', fontproperties=text_font)
+    plt.ylabel('本抽概率', fontproperties=text_font)
+
+    x0 = np.arange(end_pull)
+    expectation = (x0*D).sum()
+    # 标记期望和对应竖虚线
+    plt.axvline(x=expectation, c="lightgray", ls="--", lw=1, zorder=0)
+    plt.text(expectation+1*x_bias, D.max()/2, '期望:'+str(round(expectation, 2))+'抽',
+                        c='gray',
+                        fontproperties=mark_font,
+                        path_effects=[pe.withStroke(linewidth=2, foreground="white")])
+    plt.tight_layout()
+    plt.show()
+    
+
 
 if __name__ =='__main__':
     pass
