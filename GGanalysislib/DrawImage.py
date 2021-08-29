@@ -155,13 +155,14 @@ class DrawTransCDF():
         # 设置额外说明
         self.img_description = ''
 
-def plot_distribution(D):
+def plot_distribution(D, suptitle=None):
     # 输入的D为一维数组，从0开始
     end_pull = len(D)
 
     # 导入字体
     text_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Medium.otf", size=10)
     title_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Bold.otf", size=10)
+    suptitle_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Bold.otf", size=15)
     mark_font = FontProperties(fname=r"./fonts/SourceHanSansSC-Bold.otf", size=10)
     
     # 自适应偏移量
@@ -170,6 +171,10 @@ def plot_distribution(D):
 
     # 绘图大小
     plt.figure(figsize=(9, 8))
+
+    # 设置大图标题
+    if suptitle != None:
+        plt.suptitle(suptitle, fontproperties=suptitle_font)
 
     # 上图为累积分布函数
     plt.subplot(211)
@@ -205,9 +210,19 @@ def plot_distribution(D):
     # 标记期望和对应竖虚线
     plt.axvline(x=expectation, c="lightgray", ls="--", lw=1, zorder=0)
     plt.text(expectation+1*x_bias, D.max()/2, '期望:'+str(round(expectation, 2))+'抽',
-                        c='gray',
-                        fontproperties=mark_font,
-                        path_effects=[pe.withStroke(linewidth=2, foreground="white")])
+            c='gray',
+            fontproperties=mark_font,
+            path_effects=[pe.withStroke(linewidth=2, foreground="white")])
+    # 标记分布峰值和对应竖虚线
+    max_pos = D.argmax()
+    y_pos_const = 0.75
+    if (max_pos-expectation)/end_pull > 0.01:
+        plt.axvline(x=max_pos, c="lightgray", ls="--", lw=1, zorder=0)
+        y_pos_const = 0.5
+    plt.text(max_pos+1*x_bias, y_pos_const*D.max(), '峰值:'+str(max_pos)+'抽',
+            c='gray',
+            fontproperties=mark_font,
+            path_effects=[pe.withStroke(linewidth=2, foreground="white")])
     plt.tight_layout()
     plt.show()
     

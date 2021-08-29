@@ -75,7 +75,7 @@ weapon_num = 1      # 要抽的UP武器数量
 test_obj = GGanalysislib.Up5starCharacter()
 A = test_obj.get_distribution(character_num, character_num*180, 0 , 0)[character_num]
 test_obj = GGanalysislib.Up5starWeaponEP()
-B = test_obj.get_distribution(1, weapon_num*240, 0 , 0)[weapon_num]
+B = test_obj.get_distribution(weapon_num, weapon_num*240, 0 , 0)[weapon_num]
 C = np.convolve(A, B, mode='full')      # 卷积一下就得到了复合
 print(sum(C[0:use_pull+1]))             # 输出概率
 
