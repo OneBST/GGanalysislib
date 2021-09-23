@@ -1,5 +1,29 @@
 import numpy as np
 
+# 计算转移矩阵对应平稳分布
+'''
+    转移矩阵如下，分布为列向量
+    |1 0.5|     |x|
+    |0 0.5|     |y|
+'''
+def calc_stationary_distribution(M):
+    matrix_shape = np.shape(M)
+    if matrix_shape[0] == matrix_shape[1]:
+        pass
+    else:
+        print("平稳分布计算错误:输入应该为方阵")
+        return
+    # 减去对角阵
+    C = M - np.identity(matrix_shape[0])
+    # 末行设置为1
+    C[matrix_shape[0]-1] = 1
+    # 设置向量
+    X = np.zeros(matrix_shape[0], dtype=float)
+    X[matrix_shape[0]-1] = 1
+    # 解线性方程求解
+    ans = np.linalg.solve(C, X)
+    return ans
+
 def calc_coupling_p(p_a, p_b):
     # a为高优先级 b为低优先级
     # 保底抽数
@@ -43,7 +67,7 @@ def calc_coupling_p(p_a, p_b):
     # print(M.cumsum(axis=0)[989])
     # np.savetxt("check.csv", M, delimiter=',')
     # print(M)
-    
+    '''
     # 减去对角阵
     M = M-np.identity((pos_a-1)*pos_b)
     # 末行设置为1
@@ -55,6 +79,8 @@ def calc_coupling_p(p_a, p_b):
 
     # 解线性方程求解
     ans = np.linalg.solve(M, X)
+    '''
+    ans = calc_stationary_distribution(M)
     
     '''
     # 低优先度物品分布计算

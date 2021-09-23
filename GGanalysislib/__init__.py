@@ -24,6 +24,7 @@ from GGanalysislib.DrawImage import DrawTransCDF
 from GGanalysislib.DrawImage import plot_distribution
 # 概率分析工具
 from GGanalysislib.PityCouplingP import calc_coupling_p
+from GGanalysislib.PityCouplingP import calc_stationary_distribution
 
 if __name__ == '__main__':
     pass

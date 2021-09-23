@@ -9,6 +9,7 @@ check.xlsx
 *.png
 temp.csv
 temp_plot.py
+temp_use.py
 
 # test files
 test.py
