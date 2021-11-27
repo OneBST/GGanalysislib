@@ -17,7 +17,7 @@ double** build_2D_index(double* storage, int rows, int cols)
 double*** build_3D_index(double* storage, int layers, int rows, int cols)
 {
     int i;
-    double ***index_layer, **index_row, *temp_ptr;
+    double ***index_layer, **index_row;
     index_row = (double**)malloc(layers * rows * sizeof(void*));
     index_layer = (double***)malloc(layers * sizeof(void*));
     //创建指向每一平面的每行的指针

@@ -30,7 +30,7 @@ void APICALL pity_item_DP(
     int pull_state      //垫抽情况
 )
 {
-    int i,j,k,pull;
+    int i,j,pull;
     //DP数组声明
     double** M;
     double* temp_storage = malloc((item_num+1) * (calc_pull+1) * sizeof(double));
@@ -107,7 +107,7 @@ void APICALL GI_upitem_DP(
     int stander_num     //常驻池中物品数量
 )
 {
-    int i,j,k,pull;
+    int i,j,pull;
     //DP数组声明
     double*** M;
     double* temp_storage = malloc((item_num+1) * (calc_pull+1) * 3 * sizeof(double));
@@ -225,11 +225,11 @@ void APICALL GI_weapon_EP_DP(
     int stander_num     //常驻池中物品数量
 )
 {
-    int i,j,k,pull;
+    int i,j,pull;
     //DP数组声明
     double*** M;
     double* temp_storage = malloc((item_num+1) * (calc_pull+1) * 4 * sizeof(double));
-    for(i=0; i<(item_num+1)*(calc_pull+1)*3; i++)
+    for(i=0; i<(item_num+1)*(calc_pull+1)*4; i++)
         temp_storage[i] = 0;
     
     M = build_3D_index(temp_storage, item_num+1, calc_pull+1, 4);
@@ -372,7 +372,6 @@ void APICALL GI_stander_DP(
         O[0][0][type_state] = 1;
 
     int last_pos;       //开始转移概率位置
-    int last_k;         //上次的k
     int fix_pull;       //修正非0开始的平稳参数
     double p_trans;     //恰好在本抽抽到概率
     double p_get;       //常驻本类所有物品中得到想要物品的概率

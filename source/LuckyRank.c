@@ -10,7 +10,7 @@ double APICALL rank_common_item(
     int pity_pos        //保底抽数
 )
 {
-    int i,j,k,pull;
+    int i,j,pull;
     /*DP数组声明*/
     double** M;
     double* temp_storage = malloc((get_num+1) * (use_pull+1) * sizeof(double));
@@ -74,7 +74,7 @@ double APICALL rank_up_item(
     int up_type         //UP物品种类
 )
 {
-    int i,j,k,pull;
+    int i,j,pull;
     //DP数组声明
     double*** M;
     double* temp_storage = malloc((get_num+1) * (use_pull+1) * 3 * sizeof(double));
@@ -144,7 +144,6 @@ double APICALL rank_up_item(
     // if(up_guarantee == 0)
     //     printf("up_guarantee=0!\n");
     double ans = 0.0;
-    int calc_end_pos;
     double refer_e;     //从零抽特定UP物品的期望
     double test_e;      //输入情况期望
     double case_e;      //列举条件的期望

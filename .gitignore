@@ -10,11 +10,16 @@ check.xlsx
 temp.csv
 temp_plot.py
 temp_use.py
+GGanalysis.egg-info
 
 # test files
 test.py
 temp.py
 .DS_Store
+
+# not working
+setup.py
+MANIFEST.in
 
 # vs code setting
 .vscode/
