@@ -36,8 +36,8 @@ player = GGanalysislib.Up5starWeaponOld()
 # 2 表示上个五星抽到了常驻          命定值为1
 # 3 表示，表示下个五星就是UP        命定值为2
 player = GGanalysislib.Up5starWeaponEP()
-print("命定值为1，上个五星抽到了常驻，垫了0抽的情况下，抽160抽能出指定一把UP武器的概率为")
-print(player.get_p(item_num=1, calc_pull=160, pull_state=0, up_guarantee=1))
+print("命定值为1，上个五星抽到了常驻，垫了0抽的情况下，抽130抽能出指定一把UP武器的概率为")
+print(player.get_p(item_num=1, calc_pull=130, pull_state=0, up_guarantee=1))
 
 
 
