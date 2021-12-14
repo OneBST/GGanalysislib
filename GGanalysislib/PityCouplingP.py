@@ -24,7 +24,7 @@ def calc_stationary_distribution(M):
     ans = np.linalg.solve(C, X)
     return ans
 
-def calc_coupling_p(p_a, p_b):
+def calc_coupling_p(p_a, p_b, return_dist=False):
     # a为高优先级 b为低优先级
     # 保底抽数
     pos_a = len(p_a)  # 91
@@ -82,7 +82,17 @@ def calc_coupling_p(p_a, p_b):
     '''
     ans = calc_stationary_distribution(M)
     
-    '''
+
+    # stable_p_a = 0
+    stable_p_b = 0
+    # for j in range(pos_b):  # 低优先级物品状态 0-10
+    #     stable_p_a += ans[j]
+    for i in range(1, pos_a-1):  # 高优先级物品状态 1-89
+        stable_p_b += ans[i*pos_b]
+    if return_dist is not True:
+        return stable_p_b
+    
+    
     # 低优先度物品分布计算
     ans2 = np.zeros(pos_b+1, dtype=float)
     for i in range(pos_a-1):
@@ -91,13 +101,5 @@ def calc_coupling_p(p_a, p_b):
             ans2[j+1] += ans[i*pos_b + j] * trans_p
         trans_p = min(1-p_a[i+1], 1)
         ans2[pos_b] += ans[i*pos_b + pos_b-1] * trans_p
-    print(ans2/ans2.sum())  
-    '''
 
-    # stable_p_a = 0
-    stable_p_b = 0
-    # for j in range(pos_b):  # 低优先级物品状态 0-10
-    #     stable_p_a += ans[j]
-    for i in range(1, pos_a-1):  # 高优先级物品状态 1-89
-        stable_p_b += ans[i*pos_b]
-    return stable_p_b
+    return ans2/ans2.sum()

@@ -31,24 +31,22 @@ class PityGacha():
     # 五星武器保底概率提升表
     @classmethod
     def weapon_5star_pity(cls):
-        pity_p = np.zeros(81, dtype=float)
+        # 改为78保底
+        pity_p = np.zeros(78, dtype=float)
         for i in range(1, 63):
             pity_p[i] = 0.007
-        for i in range(63, 74):
+        for i in range(63, 77):
             pity_p[i] = pity_p[i-1] + 0.07
-        for i in range(74, 80):
-            pity_p[i] = pity_p[i-1] + 0.035
-        pity_p[80] = 1
+        pity_p[77] = 1
         return pity_p
     # 四星武器保底概率提升表
     @classmethod
     def weapon_4star_pity(cls):
-        pity_p = np.zeros(11, dtype=float)
+        pity_p = np.zeros(10, dtype=float)
         for i in range(1, 8):
             pity_p[i] = 0.06
         pity_p[8] = 0.66
-        pity_p[9] = 0.96   
-        pity_p[10] = 1
+        pity_p[9] = 1   
         return pity_p
         
     def init_pity_p(self):  # 初始化概率提升表，继承时候需要重写

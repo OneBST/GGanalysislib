@@ -7,7 +7,7 @@ class Up5starWeaponOld(UpItem):
         self.pity_p = self.weapon_5star_pity()
     def set_const(self):
         # 保底参数
-        self.pity_pos = 80          # 保底位置
+        self.pity_pos = 77          # 保底位置
         self.up_rate = 0.75         # UP概率
         self.up_type = 2            # UP物品数量
 
