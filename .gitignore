@@ -12,6 +12,8 @@ temp_plot.py
 temp_use.py
 GGanalysis.egg-info
 check_weapon_4.py
+*.json
+avg_pulls_95.py
 
 # test files
 test.py

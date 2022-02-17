@@ -31,7 +31,7 @@ class DrawTransCDF():
             return str(num) + '精'
         return 'TYPE SET ERROR!'
 
-    def plot_img(self, cdf_ans):
+    def plot_img(self, cdf_ans, format='png'):
         data_size = np.shape(cdf_ans)
         calc_pull = data_size[1]
 
@@ -113,7 +113,7 @@ class DrawTransCDF():
                 horizontalalignment='left',
                 verticalalignment='top')
         if self.save_img:
-            plt.savefig('./fig/'+self.img_name+'.png', bbox_inches='tight' , pad_inches=0.15)  # 
+            plt.savefig('./fig/'+self.img_name+'.'+format, bbox_inches='tight' , pad_inches=0.15)  # 
         if self.show_img:
             plt.show()
 
