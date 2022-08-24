@@ -1,14 +1,12 @@
 # 原神抽卡概率分析工具包-GGanalysis
 
-本工具包用于原神抽卡概率计算，且具备较高性能
+本工具包用于原神抽卡概率计算，~~且具备较高性能~~，目前大部分计算没有[GGanalysisLite](https://github.com/OneBST/GGanalysisLite)工具包快了，此工具包将仅仅进行简单的维护。
 
 工具包默认采用的抽卡模型见[原神抽卡全机制总结](https://www.bilibili.com/read/cv10468091)
 
-工具包绘制图表见[原神抽卡概率工具表](https://www.bilibili.com/read/cv12616453)
+工具包绘制图表见[原神抽卡概率工具表](https://www.bilibili.com/read/cv12616453)，~~虽然这里面大部分图都该用GGanalysisLite绘制了~~。
 
-样例程序为example.py
-
-运行draw_img.py可以绘制出各种抽数分布图（常驻祈愿分布图绘制会比较慢）
+样例程序为example.py，运行draw_img.py可以绘制出各种抽数分布图（常驻祈愿分布图绘制会比较慢）
 
 ### Python依赖及安装
 #### Python依赖
@@ -24,14 +22,6 @@
 	```
 
 	\* Python路径可能根据个人电脑运行环境不同而变化；在Windows环境下，可能需要将Python添加到`PATH`环境变量中；在macOS及Linux环境下，请善用`which`命令确认当前使用的python路径
-
-### 规划列表
-
-- [ ] 完成导出函数部分的内存回收
-- [ ] 将抽卡模拟器做的更易使用并合并到项目中
-- [ ] 编写工具包函数说明
-- [ ] 制作一个简易的图形界面
-- [x] 编写分析UP物品抽取运气的函数（武器定轨就不写了）
 
 ### 动态库编译说明
 

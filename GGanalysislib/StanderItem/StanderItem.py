@@ -74,20 +74,20 @@ class StanderItem(PityGacha):
     # 设置平稳参数
     def init_hit_p(self):
         self.hit_p = np.zeros(self.hit_pos+1, dtype=float)
-        for i in range(1, 148):
+        for i in range(1, 147):
             self.hit_p[i] = 0.5
-        for i in range(148, 181):
-            self.hit_p[i] = (0.03 * (i-147) + 0.003) / min(1, 0.03 * (i-147) + 0.006)
+        for i in range(147, 180):
+            self.hit_p[i] = (0.03 * (i-146) + 0.003) / min(1, 0.03 * (i-146) + 0.006)
     # 常数设置
     def set_const(self):
         # 保底参数
         self.pity_pos = 90          # 保底位置
-        self.hit_pos = 180          # 类别保底位置
+        self.hit_pos = 179          # 类别保底位置
 
         # 普池参数
         self.last_type = 0          # 上次抽到物品种类 0表示本类 1表示异类
         self.type_state = 0         # 多少抽没有另一类物品
-        self.stander_num = 5        # 常驻池中本类别物品数量
+        self.stander_num = 6        # 常驻池中本类别物品数量
         self.collect_all = 0        # 计算抽齐各类物品概率开关
     # 初始化函数
     def __init__(self):
