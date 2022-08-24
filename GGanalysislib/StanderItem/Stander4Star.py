@@ -20,7 +20,7 @@ class Stander4Star(StanderItem):
         # 普池参数
         self.last_type = 0          # 上次抽到物品种类 0表示本类 1表示异类
         self.type_state = 0         # 多少抽没有另一类物品
-        self.stander_num = 24       # 常驻池中本类别物品数量
+        self.stander_num = 27       # 常驻池中本类别物品数量
         self.collect_all = 0        # 计算抽齐各类物品概率开关
 
 class Stander4StarCharacter(Stander4Star):
@@ -32,7 +32,7 @@ class Stander4StarCharacter(Stander4Star):
         # 普池参数
         self.last_type = 0          # 上次抽到物品种类 0表示本类 1表示异类
         self.type_state = 0         # 多少抽没有另一类物品
-        self.stander_num = 24       # 常驻池中本类别物品数量
+        self.stander_num = 27       # 常驻池中本类别物品数量
         self.collect_all = 0        # 计算抽齐各类物品概率开关
 
 class Stander4StarWeapon(Stander4Star):
