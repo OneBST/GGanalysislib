@@ -1,10 +1,10 @@
-# 原神抽卡概率分析工具包-GGanalysis
+# 原神抽卡概率分析工具包-GGanalysislib
 
-本工具包用于原神抽卡概率计算，~~且具备较高性能~~，目前大部分计算没有[GGanalysisLite](https://github.com/OneBST/GGanalysisLite)工具包快了，此工具包将仅仅进行简单的维护。
+本工具包用于原神抽卡概率计算，~~且具备较高性能~~，目前大部分计算没有现在的[GGanalysis](https://github.com/OneBST/GGanalysis)工具包快了，此工具包将仅仅进行简单的维护。
 
 工具包默认采用的抽卡模型见[原神抽卡全机制总结](https://www.bilibili.com/read/cv10468091)
 
-工具包绘制图表见[原神抽卡概率工具表](https://www.bilibili.com/read/cv12616453)，~~虽然这里面大部分图都该用GGanalysisLite绘制了~~。
+工具包绘制图表见[原神抽卡概率工具表](https://www.bilibili.com/read/cv12616453)，~~虽然这里面大部分图都该用GGanalysis绘制了~~。
 
 样例程序为example.py，运行draw_img.py可以绘制出各种抽数分布图（常驻祈愿分布图绘制会比较慢）
 
@@ -29,4 +29,4 @@
 
 在macOS上第一次使用时，需要在根目录下执行一次`make`以编译可用的二进制文件
 
-如果你的mac上没有编译工具，可将[GGanalysislib/bin](GGanalysislib/bin)中的libGGanalysis.macos重命名并替换原有的libGGanalysis.so文件
+如果你的mac上没有编译工具，可将[GGanalysislib/bin](GGanalysislib/bin)中的`libGGanalysis.macos`重命名并替换原有的`libGGanalysis.so`文件
